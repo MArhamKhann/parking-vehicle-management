@@ -41,3 +41,77 @@ int login() {
 }
 
 
+
+// Load data from file
+void loadFromFile() {
+    FILE *file = fopen("parking.txt", "r");
+    if (file == NULL) return;
+
+    while (fscanf(file, "%19s %9s %d", parking[count].number, parking[count].type, &parking[count].slot) == 3) {
+        count++;
+    }
+
+    fclose(file);
+}
+
+// Save data to file
+void saveToFile() {
+    FILE *file = fopen("parking.txt", "w");
+    if (file == NULL) {
+        printf("Error saving data to file!\n");
+        return;
+    }
+
+    for (int i = 0; i < count; i++) {
+        fprintf(file, "%s %s %d\n", parking[i].number, parking[i].type, parking[i].slot);
+    }
+
+    fclose(file);
+}
+
+// Add a new vehicle
+void addVehicle() {
+    if (count >= MAX) {
+        printf("Parking lot is full!\n");
+        return;
+    }
+
+    printf("Enter vehicle number: ");
+    scanf("%19s", parking[count].number);
+
+    printf("Enter vehicle type: ");
+    scanf("%9s", parking[count].type);
+
+    parking[count].slot = count + 1;
+    printf("Vehicle parked at slot number %d\n", parking[count].slot);
+
+    count++;
+}
+
+// Remove a vehicle
+void removeVehicle() {
+    char number[20];
+    int found = 0;
+
+    printf("Enter vehicle number to remove: ");
+    scanf("%19s", number);
+
+    for (int i = 0; i < count; i++) {
+        if (strcmp(parking[i].number, number) == 0) {
+            // Shift all vehicles after this one
+            for (int j = i; j < count - 1; j++) {
+                parking[j] = parking[j + 1];
+                parking[j].slot = j + 1; // Update slot number
+            }
+            count--;
+            found = 1;
+            printf("Vehicle removed successfully!\n");
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Vehicle not found!\n");
+    }
+}
+
