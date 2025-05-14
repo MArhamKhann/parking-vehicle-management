@@ -114,4 +114,34 @@ void removeVehicle() {
         printf("Vehicle not found!\n");
     }
 }
+// display vehicles
+void displayVehicles() {
+    if (count == 0) {
+        printf("No vehicles parked.\n");
+        return;
+    }
+    printf("Parked Vehicles:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%s %s Slot: %d\n", parking[i].number, parking[i].type, parking[i].slot);
+    }
+}
+// search vehicles
+void searchVehicle() {
+    char number[20];
+    int found = 0;
+    printf("Enter vehicle number to search: ");
+    scanf("%s", number);
+
+    for (int i = 0; i < count; i++) {
+        if (strcmp(parking[i].number, number) == 0) {
+            printf("Vehicle found at slot %d. Type: %s\n", parking[i].slot, parking[i].type);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Vehicle not found!\n");
+    }
+}
 
