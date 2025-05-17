@@ -144,4 +144,11 @@ void searchVehicle() {
         printf("Vehicle not found!\n");
     }
 }
+void totalVehicles(){
+	printf("Total Parked Vehicles:%d \n",count);
+}
+
+void availableSlots(){
+	printf("Available Parking Slots:%d \n", MAX - count);
+}
 
