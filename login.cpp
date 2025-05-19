@@ -151,4 +151,17 @@ void totalVehicles(){
 void availableSlots(){
 	printf("Available Parking Slots:%d \n", MAX - count);
 }
+void clearAllRecords() {
+    char confirm;
+    printf(“Are you sure you want to clear all parking data? (y/n): “);
+    scanf(“%c”, &confirm); // Note the space before %c to catch leftover newline
 
+    if (confirm == ‘y’ || confirm == ‘Y’) {
+        count = 0;
+        FILE *file = fopen(“parking.txt”, “W”); // Clears file
+        fclose(file);
+        printf(“All records cleared. \n”);
+    } else {
+        printf(“Cancelled.\n”);
+    }
+}
