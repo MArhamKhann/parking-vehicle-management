@@ -165,3 +165,24 @@ void clearAllRecords() {
         printf(“Cancelled.\n”);
     }
 }
+
+
+// Main Menu
+int main() {
+    if (!login()) return 0;
+    loadFromFile();
+
+    int choice;
+    while (1) {
+        printf("\n----- Vehicle Parking Management -----\n");
+        printf("1. Park Vehicle\n");
+        printf("2. Remove Vehicle\n");
+        printf("3. Display All Vehicles\n");
+        printf("4. Search Vehicle by Number\n");
+        printf("5. Total Parked Vehicles\n");
+        printf("6. Show Available Parking Slots\n");
+        printf("7. Clear All Records\n");
+        printf("8. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
